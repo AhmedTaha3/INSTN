@@ -1,2 +1,2 @@
 # INSTN
-Dematerialisation de l'INSTN
+This branch contain the user and reception interfaces.
