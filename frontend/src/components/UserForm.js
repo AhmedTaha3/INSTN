@@ -24,6 +24,7 @@ const UserForm = () => {
                 {
                     analysisType: '',
                     parameter: '',
+                    element:'',
                     technique: ''
                 }
             ]
@@ -65,6 +66,7 @@ const UserForm = () => {
         updatedSamples[sampleIndex].analysisDetails.push({
             analysisType: '',
             parameter: '',
+            element:'',
             technique: ''
         });
         setSamples(updatedSamples);
@@ -80,6 +82,7 @@ const UserForm = () => {
                 {
                     analysisType: '',
                     parameter: '',
+                    element:'',
                     technique: ''
                 }
             ]
@@ -119,6 +122,7 @@ const UserForm = () => {
                 {
                     analysisType: '',
                     parameter: '',
+                    element:'',
                     technique: ''
                 }
             ]
@@ -206,9 +210,7 @@ const UserForm = () => {
                     required
                 />
             </div>
-            {/* <div className="form-header">
-                <h2>Informations sur les échantillons</h2>
-            </div> */}
+
             {samples.map((sample, index) => (
                 <div key={index} className="sample-group">
                     <div className="form-header">
@@ -262,9 +264,6 @@ const UserForm = () => {
                             required
                         />
                     </div>
-                    {/* <div className="form-header"> */}
-                        {/* <h3>Détails des analyses</h3> */}
-                    {/* </div> */}
                     {sample.analysisDetails.map((analysis, analysisIndex) => (
                         <div key={analysisIndex} className="analysis-group">
                             <h3>Détails des analyses {analysisIndex + 1} sur l'echantillon {index + 1}</h3>
@@ -323,7 +322,7 @@ const UserForm = () => {
             <button type="button" onClick={addSample}>
                 Ajouter un échantillon
             </button>
-            <button type="submit">Soumettre</button>
+            <button type="submit" className='submit-button'>Soumettre</button>
         </form>
     );
 };
