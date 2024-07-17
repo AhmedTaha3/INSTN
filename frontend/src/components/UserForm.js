@@ -89,7 +89,7 @@ const UserForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        const response = await fetch('http://192.168.43.184/instn/backend/index.php', {
+        const response = await fetch('http://192.168.56.1/instn/backend/index.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -206,12 +206,16 @@ const UserForm = () => {
                     required
                 />
             </div>
-            <div className="form-header">
+            {/* <div className="form-header">
                 <h2>Informations sur les échantillons</h2>
-            </div>
+            </div> */}
             {samples.map((sample, index) => (
                 <div key={index} className="sample-group">
-                    <h3>Échantillon {index + 1}</h3>
+                    <div className="form-header">
+                    <h2>Informations sur les échantillons {index+1}</h2>
+                    </div>
+                    
+                    <h3>Informations sur l'échantillon {index + 1}</h3>
                     <div className="form-group">
                         <label>Type d'échantillon:</label>
                         <select
@@ -258,11 +262,12 @@ const UserForm = () => {
                             required
                         />
                     </div>
-                    <div className="form-header">
-                        <h4>Détails des analyses</h4>
-                    </div>
+                    {/* <div className="form-header"> */}
+                        {/* <h3>Détails des analyses</h3> */}
+                    {/* </div> */}
                     {sample.analysisDetails.map((analysis, analysisIndex) => (
                         <div key={analysisIndex} className="analysis-group">
+                            <h3>Détails des analyses {analysisIndex + 1} sur l'echantillon {index + 1}</h3>
                             <div className="form-group">
                                 <label>Type d'analyse:</label>
                                 <select
