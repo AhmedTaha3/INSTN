@@ -1,0 +1,40 @@
+instn
+│
+├── backend
+│   ├── config.php
+│   ├── creationBDD.sql
+│   ├── functions.php
+│   ├── index.php
+│   ├── testdb.txt
+│   └── auth.php            # Nouveau fichier pour gérer l'authentification
+│
+├── frontend
+│   ├── public
+│   │   ├── index.html
+│   │   └── ...
+│   │
+│   ├── src
+│       ├── components
+│       │   ├── form_client
+│       │   │   ├── UserForm.js
+│       │   │   └── userform.css
+│       │   │
+│       │   ├── reception
+│       │   │   ├── RequestsList.js
+│       │   │   ├── CreateRequest.js   # Nouveau fichier pour créer des demandes
+│       │   │   └── reception.css
+│       │   │
+│       │   ├── auth
+│       │   │   ├── Login.js           # Nouveau fichier pour le formulaire de connexion
+│       │   │   └── auth.css
+│       │   │
+│       │   └── shared
+│       │       ├── Header.js          # Nouveau fichier pour l'en-tête commun
+│       │       └── Footer.js          # Nouveau fichier pour le pied de page commun
+│       │
+│       ├── App.js
+│       ├── App.css
+│       ├── index.js
+│       └── ... (autres fichiers)
+│
+└── .gitignore

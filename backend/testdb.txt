@@ -1,0 +1,36 @@
+CREATE DATABASE IF NOT EXISTS instn_db;
+USE instn_db;
+
+CREATE TABLE Demandes (
+    DemandeID INT AUTO_INCREMENT PRIMARY KEY,
+    Nom VARCHAR(255) NOT NULL,
+    Telephone VARCHAR(20) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    Adresse TEXT NOT NULL,
+    DateDemande DATE NOT NULL
+);
+
+CREATE TABLE Echantillons (
+    EchantillonID INT AUTO_INCREMENT PRIMARY KEY,
+    DemandeID INT,
+    TypeEchantillon VARCHAR(255) NOT NULL,
+    DatePrelevement DATE NOT NULL,
+    LieuPrelevement VARCHAR(255) NOT NULL,
+    PrelevementEffectuePar VARCHAR(255) NOT NULL,
+    FOREIGN KEY (DemandeID) REFERENCES Demandes(DemandeID)
+);
+
+CREATE TABLE Analyses (
+    AnalyseID INT AUTO_INCREMENT PRIMARY KEY,
+    EchantillonID INT,
+    TypeAnalyse VARCHAR(255) NOT NULL,
+    ParametresInteret VARCHAR(255) NOT NULL,
+    Methode VARCHAR(255) NOT NULL,
+    FOREIGN KEY (EchantillonID) REFERENCES Echantillons(EchantillonID)
+);
+CREATE TABLE ElementInteret (
+    elementID INT AUTO_INCREMENT PRIMARY KEY,
+    AnalyseID INT,
+    ElementInt VARCHAR(255) NOT NULL,
+    FOREIGN KEY (AnalyseID) REFERENCES Analyses(AnalyseID)
+);

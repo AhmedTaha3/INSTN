@@ -1,0 +1,129 @@
+/* src/userform.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: #f0f4f8; /* Couleur de fond douce */
+    /* background-image: url('C:\Users\Hp\Desktop\instn-form\public\INSTN-logo.png');  */
+    background-size:auto;
+    background-position: center;
+}
+
+form {
+    width: 90%;
+    /* max-width: 800px; */
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* Couleur de fond translucide */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.form-header {
+    background-color: #2e8b57; /* Vert */
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    color: white;
+    text-align: center;
+    margin: -20px -20px 20px -20px;
+}
+
+.form-group {
+    margin-bottom: 25px; /* Augmenter la marge pour éviter le chevauchement */
+}
+
+.sample-group {
+    border: 2px solid #2e8b57; /* Bordure bleue */
+    border-radius: 15px; /* Angles arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
+    padding: 20px; /* Espace interne */
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Couleur de fond */
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #2e8b57; /* Vert */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #2e8b57; /* Vert */
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+select {
+    appearance: none;
+    /* background: url('path/to/dropdown-icon.png') no-repeat right #fff; */
+    background-size: 12px;
+    padding-right: 20px;
+    animation: dropdownSlideIn 0.5s ease;
+}
+
+select:focus {
+    background-color: #e0f7fa; /* Couleur de fond au focus */
+    border-color: #238443; /* Bordure plus foncée au focus */
+}
+
+button {
+    background-color: #2e8b57; /* Vert */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+    margin-bottom: 25px;
+    margin-left: 40%;
+    margin-right:40%;
+    padding: 10px 15px;
+}
+.submit-button{
+    margin-left: 43%;
+    margin-right:43%;
+}
+button:hover {
+    background-color: #183020; /* Vert plus foncé */
+}
+
+button:active {
+    background-color: #1a5f32; /* Vert encore plus foncé */
+}
+
+input:focus,
+select:focus {
+    border-color: #238443; /* Vert plus foncé */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 128, 0, 0.5); /* Ombre verte */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes dropdownSlideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
