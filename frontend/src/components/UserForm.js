@@ -145,6 +145,37 @@ const UserForm = () => {
         }
     };
 
+    const getElementOptions = (parameter) => {
+        switch (parameter) {
+            case 'Metaux':
+                return ["Calcium (Ca)", "Magnesium (Mg)", "Sodium (Na)", "Potassium (K)", "Fer (Fe)", 
+                    "Manganese (Mn)", "Aluminium (Al)", "Plomb (Pb)", "Cuivre (Cu)", "Zinc (Zn)", 
+                    "Chrome (Cr)", "Nickel (Ni)", "Arsenic (As)", "Cadmium (Cd)", "Cobalt (Co)"];
+            case 'Metaux lourds':
+            case 'Elements nutritif':
+                return ["Calcium (Ca)", "Magnesium (Mg)", "Sodium (Na)", "Potassium (K)", "Fer (Fe)", 
+                    "Manganese (Mn)", "Aluminium (Al)", "Plomb (Pb)", "Cuivre (Cu)", "Zinc (Zn)", 
+                    "Chrome (Cr)", "Nickel (Ni)", "Arsenic (As)", "Cadmium (Cd)", "Cobalt (Co)", 
+                    "Phosphore (P)", "Selenium (Se)", "Molybdene (Mo)", "Titane (Ti)", "Brome (Br)", 
+                    "Strontium (Sr)", "Nyobium (Nb)", "Zirconium (Zr)", "Tantale (Tl)", "Silicium (Si)", 
+                    "Chlore (Cl)"];
+            case 'Anion':
+                return ["Chorure (Cl-)", "Bicarbonate (HCO3-)", "Phosphore (PO4--)", "Nitrate (NO3-)", "Sulfate (SO4--)"];
+            case 'Cation':
+                return ["Sodium (Na+)", "Potassium (K+)", "Magnesium (Mg++)", "Calcium (Ca++)"];
+            case 'Elements radioactif':
+                return ["Uranum-238 (U238)", "Thorium-232 (Th232)", "Potassium-40 (K40)", "Cesium137 (Cs137)"];
+            case 'PM':
+                return ["PM"];
+            case 'Randon':
+            return ["Randon"];
+            case 'Hg':
+                return ["Hg"];
+            default:
+                return [];
+        }
+    };
+
     const getTechniqueOptions = (sampleType, parameter) => {
         if (parameter === 'Metaux' && (sampleType === 'eau' || sampleType === 'denree')) {
             return ['AAS'];
@@ -290,6 +321,23 @@ const UserForm = () => {
                                 >
                                     <option value="">Sélectionner un paramètre</option>
                                     {getParameterOptions(sample.sampleType).map((option) => (
+                                        <option key={option} value={option}>
+                                            {option}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="form-group">
+                                <label>Elements d'interet:</label>
+                                <select
+                                    name="element"
+                                    value={analysis.element}
+                                    onChange={(e) => handleAnalysisDetailsChange(index, analysisIndex, e)}
+                                    required
+                                    multiple
+                                >
+                                    <option value="">Sélectionner les elements d'interet</option>
+                                    {getElementOptions(analysis.parameter).map((option) => (
                                         <option key={option} value={option}>
                                             {option}
                                         </option>
