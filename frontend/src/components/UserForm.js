@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './userform.css';
-// test github
+
 const UserForm = () => {
     const getCurrentDate = () => {
         const today = new Date();
@@ -24,7 +24,7 @@ const UserForm = () => {
                 {
                     analysisType: '',
                     parameter: '',
-                    element:'',
+                    element: [],
                     technique: ''
                 }
             ]
@@ -50,23 +50,37 @@ const UserForm = () => {
     };
 
     const handleAnalysisDetailsChange = (sampleIndex, analysisIndex, e) => {
-        const { name, value } = e.target;
+        const { name, value, checked } = e.target;
+        
         const updatedSamples = [...samples];
         const updatedAnalysisDetails = [...updatedSamples[sampleIndex].analysisDetails];
-        updatedAnalysisDetails[analysisIndex] = {
-            ...updatedAnalysisDetails[analysisIndex],
-            [name]: value
-        };
+        
+        if (name === 'element') {
+            const newElements = checked
+                ? [...updatedAnalysisDetails[analysisIndex].element, value]
+                : updatedAnalysisDetails[analysisIndex].element.filter(el => el !== value);
+            updatedAnalysisDetails[analysisIndex] = {
+                ...updatedAnalysisDetails[analysisIndex],
+                element: newElements
+            };
+        } else {
+            updatedAnalysisDetails[analysisIndex] = {
+                ...updatedAnalysisDetails[analysisIndex],
+                [name]: value
+            };
+        }
+    
         updatedSamples[sampleIndex].analysisDetails = updatedAnalysisDetails;
         setSamples(updatedSamples);
     };
+    
 
     const addAnalysis = (sampleIndex) => {
         const updatedSamples = [...samples];
         updatedSamples[sampleIndex].analysisDetails.push({
             analysisType: '',
             parameter: '',
-            element:'',
+            element: [],
             technique: ''
         });
         setSamples(updatedSamples);
@@ -82,7 +96,7 @@ const UserForm = () => {
                 {
                     analysisType: '',
                     parameter: '',
-                    element:'',
+                    element: [],
                     technique: ''
                 }
             ]
@@ -122,7 +136,7 @@ const UserForm = () => {
                 {
                     analysisType: '',
                     parameter: '',
-                    element:'',
+                    element: [],
                     technique: ''
                 }
             ]
@@ -145,22 +159,53 @@ const UserForm = () => {
         }
     };
 
+    const getElementOptions = (parameter) => {
+        switch (parameter) {
+            case 'Metaux':
+                return ["Calcium (Ca)", "Magnesium (Mg)", "Sodium (Na)", "Potassium (K)", "Fer (Fe)", 
+                    "Manganese (Mn)", "Aluminium (Al)", "Plomb (Pb)", "Cuivre (Cu)", "Zinc (Zn)", 
+                    "Chrome (Cr)", "Nickel (Ni)", "Arsenic (As)", "Cadmium (Cd)", "Cobalt (Co)"];
+            case 'Metaux lourds':
+            case 'Elements nutritif':
+                return ["Calcium (Ca)", "Magnesium (Mg)", "Sodium (Na)", "Potassium (K)", "Fer (Fe)", 
+                    "Manganese (Mn)", "Aluminium (Al)", "Plomb (Pb)", "Cuivre (Cu)", "Zinc (Zn)", 
+                    "Chrome (Cr)", "Nickel (Ni)", "Arsenic (As)", "Cadmium (Cd)", "Cobalt (Co)", 
+                    "Phosphore (P)", "Selenium (Se)", "Molybdene (Mo)", "Titane (Ti)", "Brome (Br)", 
+                    "Strontium (Sr)", "Nyobium (Nb)", "Zirconium (Zr)", "Tantale (Tl)", "Silicium (Si)", 
+                    "Chlore (Cl)"];
+            case 'Anion':
+                return ["Chorure (Cl-)", "Bicarbonate (HCO3-)", "Phosphore (PO4--)", "Nitrate (NO3-)", "Sulfate (SO4--)"];
+            case 'Cation':
+                return ["Sodium (Na+)", "Potassium (K+)", "Magnesium (Mg++)", "Calcium (Ca++)"];
+            case 'Elements radioactif':
+                return ["Uranum-238 (U238)", "Thorium-232 (Th232)", "Potassium-40 (K40)", "Cesium137 (Cs137)"];
+            case 'PM':
+                return ["PM"];
+            case 'Randon':
+                return ["Randon"];
+            case 'Hg':
+                return ["Hg"];
+            default:
+                return [];
+        }
+    };
+
     const getTechniqueOptions = (sampleType, parameter) => {
         if (parameter === 'Metaux' && (sampleType === 'eau' || sampleType === 'denree')) {
-            return ['AAS'];
+            return ["Spectrometrie d'Absportion Atomic (SAA)"];
         } else if (parameter === 'Hg') {
-            return ['DMA'];
+            return ['Analyseur Direct de Mercure (ADM)'];
         } else if (parameter === 'Anion' || parameter === 'Cation') {
-            return ['CI'];
+            return ['Chromatographie Ionique (CI)'];
         } else if (parameter === 'Elements radioactif') {
             return ['Spectrometre Gamma', 'Spectrometre alpha'];
         } else if ((parameter === 'Metaux' && (sampleType === 'sol' || sampleType === 'minerais')) ||
             parameter === 'Elements nutritif' || parameter === 'Metaux lourds') {
-            return ['EDXRF'];
+            return ['Fluorescence X a Energie Dispersive (FXDE)'];
         } else if (parameter === 'PM') {
             return ['Drafimetrie'];
         } else if ((parameter === 'Metaux' || parameter === 'Randon') && sampleType === 'air') {
-            return ['EDXRF'];
+            return ['Fluorescence X a Energie Dispersive (FXDE)'];
         }
         return [];
     };
@@ -214,7 +259,7 @@ const UserForm = () => {
             {samples.map((sample, index) => (
                 <div key={index} className="sample-group">
                     <div className="form-header">
-                    <h2>Informations sur les échantillons {index+1}</h2>
+                        <h2>Informations sur les échantillons {index + 1}</h2>
                     </div>
                     
                     <h3>Informations sur l'échantillon {index + 1}</h3>
@@ -266,7 +311,7 @@ const UserForm = () => {
                     </div>
                     {sample.analysisDetails.map((analysis, analysisIndex) => (
                         <div key={analysisIndex} className="analysis-group">
-                            <h3>Détails des analyses {analysisIndex + 1} sur l'echantillon {index + 1}</h3>
+                            <h3>Détails des analyses {analysisIndex + 1} sur l'échantillon {index + 1}</h3>
                             <div className="form-group">
                                 <label>Type d'analyse:</label>
                                 <select
@@ -296,6 +341,24 @@ const UserForm = () => {
                                     ))}
                                 </select>
                             </div>
+                            <div className="form-group">
+                                <label className="selected-elements">Éléments d'intérêt: {analysis.element.join(', ')}</label>
+                                <div className="checkbox-group">
+                                    {getElementOptions(analysis.parameter).map((option) => (
+                                        <label key={option} className="checkbox-label">
+                                            <input
+                                                type="checkbox"
+                                                name="element"
+                                                value={option}
+                                                checked={analysis.element.includes(option)}
+                                                onChange={(e) => handleAnalysisDetailsChange(index, analysisIndex, e)}
+                                            />
+                                            {option}
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
                             <div className="form-group">
                                 <label>Technique:</label>
                                 <select

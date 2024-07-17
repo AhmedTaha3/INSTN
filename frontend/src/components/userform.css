@@ -127,3 +127,33 @@ select:focus {
         opacity: 1;
     }
 }
+
+/* Ajoutez ce CSS dans votre fichier userform.css */
+
+.selected-elements {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 2px solid #2e8b57; /* Bordure bleue */
+    border-radius: 15px; /* Angles arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
+    padding: 20px; /* Espace interne */
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Couleur de fond */
+
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.checkbox-label input {
+    margin-right: 5px;
+}
